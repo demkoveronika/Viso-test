@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Meal } from "../../types/Meal";
+
 import "./MealPage.css";
 
 export const MealPage: React.FC = () => {
@@ -14,7 +15,9 @@ export const MealPage: React.FC = () => {
       try {
         if (!mealId) return;
 
-        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`);
+        const response = await fetch(
+          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch recipe data");

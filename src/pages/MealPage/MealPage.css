@@ -29,7 +29,8 @@
   font-size: 18px;
 }
 
-.meal-desc-category, .meal-desc-origin {
+.meal-desc-category,
+.meal-desc-origin {
   font-weight: 700;
   margin: 0;
   margin-top: 5px;

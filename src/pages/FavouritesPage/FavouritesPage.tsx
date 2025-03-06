@@ -1,6 +1,7 @@
 import React from "react";
-import { useFavorites } from "../../context/FavoritesContext";
 import { Link } from "react-router-dom";
+import { useFavorites } from "../../context/FavoritesContext";
+
 import "./FavouritesPage.css";
 
 export const FavoritesPage: React.FC = () => {
@@ -15,10 +16,7 @@ export const FavoritesPage: React.FC = () => {
         <div className="favourite-cards">
           {selectedRecipes.map((meal) => (
             <div key={meal.idMeal} className="favourite-card">
-              <Link
-                to={`/meal/${meal.idMeal}`}
-                className="favourite-link"
-              >
+              <Link to={`/meal/${meal.idMeal}`} className="favourite-link">
                 <div>
                   <img
                     src={meal.strMealThumb}

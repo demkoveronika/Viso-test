@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import "./MealCard.css";
 import { useFavorites } from "../../context/FavoritesContext";
+
+import "./MealCard.css";
 
 interface RecipeCardProps {
   id: string;

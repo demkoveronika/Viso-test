@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "./MealsPage.css";
-import { MealCard } from "../../components/MealCard/MealCard";
-import { Meal } from "../../types/Meal";
-import { Pagination } from "../../components/Pagination/Pagination";
 import { useFavorites } from "../../context/FavoritesContext";
 import { Link } from "react-router-dom";
+
+import { Meal } from "../../types/Meal";
+import { MealCard } from "../../components/MealCard/MealCard";
+import { Pagination } from "../../components/Pagination/Pagination";
+
+import "./MealsPage.css";
 
 export const MealsPage: React.FC = () => {
   const [meals, setMeals] = useState<Meal[]>([]);
@@ -13,25 +15,39 @@ export const MealsPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
 
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [category, setCategory] = useState<string>("All");
+  const [categories, setCategories] = useState<string[]>([]);
+
   const { addToFavorites } = useFavorites();
 
-  const totalPages = Math.ceil(meals.length / itemsPerPage);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(
+          "https://www.themealdb.com/api/json/v1/1/categories.php"
+        );
+        const data = await response.json();
+        setCategories(
+          data.categories.map(
+            (category: { strCategory: string }) => category.strCategory
+          )
+        );
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
 
-  const currentMeals = meals.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     const fetchMeals = async () => {
       try {
         const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
         const urls = alphabet.map(
-          (letter) => `https://www.themealdb.com/api/json/v1/1/search.php?s=${letter}`
+          (letter) =>
+            `https://www.themealdb.com/api/json/v1/1/search.php?s=${letter}`
         );
 
         const responses = await Promise.all(
@@ -55,6 +71,38 @@ export const MealsPage: React.FC = () => {
     fetchMeals();
   }, []);
 
+  const filteredMeals = meals.filter((meal) => {
+    if (category === "All") {
+      return true;
+    }
+    return meal.strCategory === category;
+  });
+
+  useEffect(() => {
+    const debounceSearch = setTimeout(() => {
+      setSearchQuery(searchQuery);
+    }, 500);
+
+    return () => clearTimeout(debounceSearch);
+  }, [searchQuery]);
+
+  const searchedMeals = filteredMeals.filter((meal) =>
+    meal.strMeal.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const mealsToDisplay = searchedMeals;
+
+  const totalPages = Math.ceil(mealsToDisplay.length / itemsPerPage);
+
+  const currentMeals = mealsToDisplay.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   if (error) {
     return <div>{error}</div>;
   }
@@ -70,6 +118,22 @@ export const MealsPage: React.FC = () => {
         <Link to="/favorites">
           <h3 className="meal-favorites">Favourites →</h3>
         </Link>
+      </div>
+
+      <div className="filters">
+        <input
+          type="text"
+          placeholder="Search meals..."
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <select onChange={(e) => setCategory(e.target.value)} value={category}>
+          <option value="All">All Categories</option>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="meal-container">

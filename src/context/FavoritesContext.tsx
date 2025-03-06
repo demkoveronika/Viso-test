@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState } from 'react';
-import { ReactNode } from 'react';
-import { Meal } from '../types/Meal';
+import React, { createContext, useContext, useState } from "react";
+import { ReactNode } from "react";
+
+import { Meal } from "../types/Meal";
 
 interface FavoritesContextType {
   selectedRecipes: Meal[];
@@ -12,9 +13,13 @@ interface FavoritesProviderProps {
   children: ReactNode;
 }
 
-const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined);
+const FavoritesContext = createContext<FavoritesContextType | undefined>(
+  undefined
+);
 
-export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({ children }) => {
+export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
+  children,
+}) => {
   const [selectedRecipes, setSelectedRecipes] = useState<Meal[]>([]);
 
   const addToFavorites = (meal: Meal) => {
@@ -26,7 +31,9 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({ children }
   };
 
   return (
-    <FavoritesContext.Provider value={{ selectedRecipes, addToFavorites, removeFromFavorites }}>
+    <FavoritesContext.Provider
+      value={{ selectedRecipes, addToFavorites, removeFromFavorites }}
+    >
       {children}
     </FavoritesContext.Provider>
   );

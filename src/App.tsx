@@ -1,10 +1,11 @@
-import React from "react";
-import "./App.css";
-import { FavoritesProvider } from "./context/FavoritesContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { FavoritesProvider } from "./context/FavoritesContext";
+
 import { FavoritesPage } from "./pages/FavouritesPage/FavouritesPage";
 import { MealPage } from "./pages/MealPage/MealPage";
 import { MealsPage } from "./pages/MealsPage/MealsPage";
+
+import "./App.css";
 
 function App() {
   return (

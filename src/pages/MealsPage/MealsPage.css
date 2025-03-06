@@ -16,7 +16,6 @@
 
 .meal-favorites {
   text-transform: uppercase;
-  
 }
 
 .meal-titles {
@@ -25,4 +24,46 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 100px;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  gap: 20px;
+}
+
+.filters input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  width: 100%;
+  max-width: 300px;
+  transition: border-color 0.3s ease;
+}
+
+.filters input:focus {
+  border-color: red;
+}
+
+.filters select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  width: 100%;
+  max-width: 200px;
+  transition: border-color 0.3s ease;
+}
+
+.filters select:focus {
+  border-color: red;
+}
+
+.filters select option {
+  padding: 10px;
 }

@@ -44,6 +44,7 @@ export const MealsPage: React.FC = () => {
   useEffect(() => {
     const fetchMeals = async () => {
       try {
+        setLoading(true);
         const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
         const urls = alphabet.map(
           (letter) =>
@@ -79,18 +80,28 @@ export const MealsPage: React.FC = () => {
   });
 
   useEffect(() => {
-    const debounceSearch = setTimeout(() => {
-      setSearchQuery(searchQuery);
+    const debounceSearch = setTimeout(async () => {
+      if (searchQuery.trim() !== "") {
+        try {
+          const response = await fetch(
+            `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery}`
+          );
+          const data = await response.json();
+          setMeals(data.meals || []);
+        } catch (error) {
+          console.error("Error fetching meals by search:", error);
+        }
+      }
     }, 500);
 
     return () => clearTimeout(debounceSearch);
   }, [searchQuery]);
 
-  const searchedMeals = filteredMeals.filter((meal) =>
-    meal.strMeal.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, category]);
 
-  const mealsToDisplay = searchedMeals;
+  const mealsToDisplay = filteredMeals;
 
   const totalPages = Math.ceil(mealsToDisplay.length / itemsPerPage);
 

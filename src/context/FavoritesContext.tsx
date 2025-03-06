@@ -23,7 +23,12 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({
   const [selectedRecipes, setSelectedRecipes] = useState<Meal[]>([]);
 
   const addToFavorites = (meal: Meal) => {
-    setSelectedRecipes((prev) => [...prev, meal]);
+    setSelectedRecipes((prev) => {
+      if (prev.some((mealInFavorites) => mealInFavorites.idMeal === meal.idMeal)) {
+        return prev;
+      }
+      return [...prev, meal];
+    });
   };
 
   const removeFromFavorites = (mealId: string) => {

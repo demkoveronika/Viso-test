@@ -45,7 +45,9 @@ export const MealCard: React.FC<RecipeCardProps> = ({
           className={`add-to-favorites ${isFavorite ? "added" : ""}`}
           onClick={(e) => {
             e.stopPropagation();
-            onAddToFavorites(id);
+            if (!isFavorite) {
+              onAddToFavorites(id);
+            }
           }}
         >
           <i className="add-title">{isFavorite ? "Added" : "Add"}</i>

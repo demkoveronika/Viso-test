@@ -31,7 +31,7 @@ export const MealsPage: React.FC = () => {
       try {
         const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
         const urls = alphabet.map(
-          (letter) => `/api/json/v1/1/search.php?s=${letter}`
+          (letter) => `https://www.themealdb.com/api/json/v1/1/search.php?s=${letter}`
         );
 
         const responses = await Promise.all(

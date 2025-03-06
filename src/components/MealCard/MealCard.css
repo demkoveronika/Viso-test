@@ -1,0 +1,48 @@
+.meal-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.meal-card:hover {
+  transform: scale(1.05);
+}
+
+.meal-name {
+  color: red;
+}
+
+.meal-category {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.meal-origin {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.meal-img {
+  width: 250px;
+  height: 250px;
+  padding-top: 20px;
+}
+
+.add-to-favorites {
+  border: none;
+  margin-bottom: 20px;
+  cursor: pointer;
+  background-color: red;
+}
+
+.add-title {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: white;
+}
+
+.added {
+  background-color: green;
+}

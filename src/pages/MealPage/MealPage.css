@@ -1,0 +1,57 @@
+.meal-page {
+  padding: 20px;
+}
+
+.meal-title {
+  text-transform: uppercase;
+  color: red;
+  font-size: 36px;
+}
+
+.meal-page-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.meal-content-left {
+  margin-left: 100px;
+}
+
+.meal-content-right {
+  margin-right: 350px;
+}
+
+.meal-desc-img {
+  width: 500px;
+  height: 500px;
+  font-size: 18px;
+}
+
+.meal-desc-category, .meal-desc-origin {
+  font-weight: 700;
+  margin: 0;
+  margin-top: 5px;
+  font-size: 18px;
+}
+
+.meal-ing-title {
+  color: red;
+  text-transform: uppercase;
+}
+
+.meal-ing-list {
+  padding: 0;
+  list-style-type: none;
+  font-size: 18px;
+}
+
+.meal-instr-title {
+  color: red;
+  text-transform: uppercase;
+}
+
+.meal-instr-desc {
+  font-size: 18px;
+}

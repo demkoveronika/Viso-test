@@ -1,0 +1,28 @@
+.meal-list {
+  text-align: center;
+}
+
+.meal-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.meal-list-title {
+  color: red;
+  text-transform: uppercase;
+}
+
+.meal-favorites {
+  text-transform: uppercase;
+  
+}
+
+.meal-titles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 100px;
+}
